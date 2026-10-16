@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Atmosphere from './effects/Atmosphere'
 import { MusicProvider } from './music/Player'
-import { Close, Countdown, Dress, Gifts, Hero, Jersey, Rsvp, Still, When, Where } from './sections/Sections'
+import { Close, Countdown, Dress, Gifts, Hero, Jersey, Nameplate, Rsvp, Still, When, Where } from './sections/Sections'
 
 export default function App() {
   const [open, setOpen] = useState(false)
@@ -30,7 +30,7 @@ export default function App() {
     if (!open) return undefined
     const frame = requestAnimationFrame(() => {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      document.getElementById('cuenta')?.scrollIntoView({
+      document.getElementById('presentacion')?.scrollIntoView({
         behavior: reduce ? 'auto' : 'smooth',
         block: 'start',
       })
@@ -45,6 +45,7 @@ export default function App() {
         <Hero onEnter={() => setOpen(true)} />
         {open && (
           <>
+            <Nameplate />
             <Countdown />
             <When />
             <Where />

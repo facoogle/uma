@@ -1,7 +1,7 @@
 const stroke = {
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 1.5,
+  strokeWidth: 1.15,
   strokeLinecap: 'round',
   strokeLinejoin: 'round',
 }
@@ -35,12 +35,11 @@ function Disco() {
   )
 }
 
-function Hanger() {
+function Sparkle() {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true">
-      <path d="M24 14 a4 4 0 1 1 4 4 C26 19 24 20 24 22" {...stroke} />
-      <path d="M8 32 L24 22 L40 32" {...stroke} />
-      <path d="M10 32 H38" {...stroke} />
+      <path d="M24 6 L26.2 18.5 L38 24 L26.2 29.5 L24 42 L21.8 29.5 L10 24 L21.8 18.5 Z" {...stroke} />
+      <path d="M36 10 L37 14 L41 15 L37 16 L36 20 L35 16 L31 15 L35 14 Z" {...stroke} />
     </svg>
   )
 }
@@ -75,7 +74,7 @@ const drawings = {
   clock: Clock,
   calendar: Calendar,
   disco: Disco,
-  hanger: Hanger,
+  sparkle: Sparkle,
   shirt: Shirt,
   gift: Gift,
   heart: Heart,

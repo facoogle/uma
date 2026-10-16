@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import HeroVisual from '../effects/HeroVisual'
 import { useMusic } from '../music/Player'
 import { banned, END, mapsDirections, mapsEmbed, party, START, wazeLink, whatsappHref } from '../data'
 import { googleCalendarUrl } from '../calendar'
@@ -33,13 +32,15 @@ export function Hero({ onEnter }) {
 
   return (
     <section className="hero">
+      <img className="hero-bg" src="/bolas.jpg" alt="" />
+      <div className="hero-shade" />
+      <div className="hero-spark" aria-hidden="true" />
       <div className="beams-pivot" aria-hidden="true">
         <div className="beams" />
       </div>
-      <HeroVisual />
       <div className="hero-copy">
         <p className="kicker">Mis XV</p>
-        <h1>Uma</h1>
+        <h1 className="silver">Uma</h1>
         <p className="invite-phrase">Quiero que seas parte de esta noche tan importante para mí</p>
         <motion.button className="btn solid invite" type="button" onClick={enter} whileTap={{ scale: 0.97 }}>
           Entrar
@@ -52,6 +53,25 @@ export function Hero({ onEnter }) {
 
 function pad(value) {
   return String(value).padStart(2, '0')
+}
+
+export function Nameplate() {
+  return (
+    <section className="nameplate" id="presentacion">
+      <div className="nameplate-pivot" aria-hidden="true">
+        <div className="nameplate-beams" />
+      </div>
+      <div className="nameplate-sweep" aria-hidden="true" />
+      <div className="nameplate-glints" aria-hidden="true">
+        <i /><i /><i /><i /><i /><i /><i /><i />
+      </div>
+      <div className="nameplate-inner">
+        <p className="nameplate-kicker">Mis XV</p>
+        <span className="nameplate-mark" aria-hidden="true" />
+        <h2 className="nameplate-name">Uma</h2>
+      </div>
+    </section>
+  )
 }
 
 export function Countdown() {
@@ -79,7 +99,7 @@ export function Countdown() {
       <div className="clock" aria-label="Cuenta regresiva para el 28 de noviembre de 2026">
         {parts.map(([label, value]) => (
           <div className="cell" key={label}>
-            <span className="num">{value}</span>
+            <span className="num" key={label === 'Segundos' ? value : label}>{value}</span>
             <span className="cell-label">{label}</span>
           </div>
         ))}
@@ -88,9 +108,9 @@ export function Countdown() {
   }
 
   return (
-    <section className="block dark" id="cuenta">
+    <section className="block dark countdown" id="cuenta">
       <Reveal className="wrap">
-        <Mark name="clock" motion="tick" />
+        <Mark name="clock" motion="float" />
         <h2 className="title">Cuenta regresiva</h2>
         {body}
       </Reveal>
@@ -100,14 +120,14 @@ export function Countdown() {
 
 export function When() {
   return (
-    <section className="block light" id="cuando">
+    <section className="block light glitter" id="cuando">
       <Reveal className="wrap">
-        <Mark name="calendar" />
+        <Mark name="calendar" motion="float" />
         <h2 className="title">¿Cuándo?</h2>
         <p className="weekday">Sábado</p>
         <p className="bignum silver">28</p>
         <p className="month">noviembre 2026</p>
-        <p className="span-time">21:30 <span>a</span> 5:30 hs</p>
+        <p className="span-time">21:30 hs<span>a</span> 5:30 hs</p>
         <div className="actions">
           <a className="btn ghost" href={googleCalendarUrl()} target="_blank" rel="noreferrer">Agendar</a>
         </div>
@@ -122,7 +142,7 @@ export function Where() {
       <Reveal className="wrap">
         <Mark name="disco" motion="spin" />
         <h2 className="title">¿Dónde?</h2>
-        <p className="venue">{party.venue}</p>
+        <p className="venue silver">{party.venue}</p>
         <p className="address">
           {party.address}
           <br />
@@ -149,7 +169,7 @@ export function Dress() {
   return (
     <section className="block light glitter" id="dress">
       <Reveal className="wrap">
-        <Mark name="hanger" />
+        <Mark name="sparkle" motion="twinkle" />
         <h2 className="title dress-title">Dress code</h2>
         <p className="dress-sub">Elegante</p>
         <p className="reserved">Colores reservados</p>
@@ -183,11 +203,11 @@ export function Jersey() {
 export function Still() {
   return (
     <section className="moment" id="noche">
-      <Reveal className="wrap moment-copy">
-        <p className="moment-line">Hagamos que sea una noche</p>
+      <img src="/bolas.jpg" alt="" />
+      <div className="moment-frame">
+        <p>Hagamos que sea una noche</p>
         <p className="moment-word">¡Inolvidable!</p>
-      </Reveal>
-      <img src="/glam.jpg" alt="" />
+      </div>
     </section>
   )
 }
@@ -220,13 +240,14 @@ export function Gifts() {
         <Mark name="gift" motion="float" />
         <h2 className="title">Regalos</h2>
         <p className="lede">
-          Nada es más importante que tu presencia, pero si deseás hacerme un presente podés enviarlo a este alias.
+          Nada es más importante que tu presencia. Pero si deseás regalarme algo, podés colaborar con mis sueños y anhelos enviándolo a la siguiente cuenta:
         </p>
         <button className="alias" type="button" onClick={copy}>
           <span>Alias</span>
           <strong>{party.alias}</strong>
           <em>{copied ? 'Copiado' : 'Copiar'}</em>
         </button>
+        <p className="thanks">Muchas gracias</p>
       </Reveal>
     </section>
   )
@@ -254,9 +275,9 @@ export function Rsvp() {
   }
 
   return (
-    <section className="block light" id="asistencia">
+    <section className="block light glitter" id="asistencia">
       <Reveal className="wrap">
-        <Mark name="heart" />
+        <Mark name="heart" motion="float" />
         <h2 className="venis">¿Venís?</h2>
         <p className="kicker ask">Confirmá tu asistencia</p>
         {sent ? (
