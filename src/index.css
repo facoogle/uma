@@ -866,7 +866,7 @@ h1, .finale {
   width: 100%;
   height: calc(100% + 52px);
   border: 0;
-  filter: grayscale(1) contrast(1.08) brightness(0.9);
+  color-scheme: light;
 }
 
 .actions {

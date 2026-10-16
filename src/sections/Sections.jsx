@@ -152,7 +152,6 @@ export function Where() {
           <iframe
             title="Mapa de Salón Ibiza, Av. Mitre 1043, Avellaneda"
             src={mapsEmbed()}
-            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
         </div>
