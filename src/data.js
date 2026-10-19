@@ -37,7 +37,6 @@ export const tracks = [
 export const banned = [
   { name: 'Azul', color: '#1c4f8f', slash: '#ffffff' },
   { name: 'Dorado', color: '#c6a15b', slash: '#16161a' },
-  { name: 'Plateado', color: '#d8d8e0', slash: '#16161a' },
   { name: 'Celeste', color: '#8fd0ea', slash: '#16161a' },
 ]
 

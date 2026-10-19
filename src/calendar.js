@@ -1,5 +1,5 @@
 const DETAILS =
-  'Dress code elegante. Sin azul, celeste, dorado ni plateado. Alias de regalos: uma15.cumple'
+  'Dress code elegante. Sin azul, dorado ni celeste. Alias de regalos: uma15.cumple'
 
 export function googleCalendarUrl() {
   const url = new URL('https://calendar.google.com/calendar/render')

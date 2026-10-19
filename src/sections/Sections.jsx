@@ -180,7 +180,7 @@ export function Dress() {
             </li>
           ))}
         </ul>
-        <p className="fine">Azul, dorado, plateado y celeste.</p>
+        <p className="fine">Azul, dorado y celeste.</p>
       </Reveal>
     </section>
   )
