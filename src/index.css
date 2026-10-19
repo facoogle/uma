@@ -1080,15 +1080,8 @@ input::placeholder { color: #7e7e8a; }
   text-transform: uppercase;
 }
 
-.for-label {
-  margin: 22px 0 0;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 20px;
-}
-
 .for-name {
-  margin: 6px 0 0;
+  margin: 10px 0 28px;
   font-family: var(--name);
   font-style: italic;
   font-weight: 500;

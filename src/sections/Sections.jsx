@@ -292,6 +292,12 @@ export function Rsvp({ guest = '' }) {
     <section className="block light glitter" id="asistencia">
       <Reveal className="wrap">
         <Mark name="heart" motion="float" />
+        {named && !sent && (
+          <>
+            <p className="kicker">Invitación para:</p>
+            <p className="for-name">{named}</p>
+          </>
+        )}
         <h2 className="venis">¿Venís?</h2>
         <p className="kicker ask">Confirmá tu asistencia</p>
         {sent ? (
@@ -305,12 +311,8 @@ export function Rsvp({ guest = '' }) {
             </div>
           </div>
         ) : named ? (
-          <div>
-            <p className="for-label">Esta invitación es para</p>
-            <p className="for-name">{named}</p>
-            <div className="actions">
-              <button className="btn solid" type="button" onClick={send}>Confirmar</button>
-            </div>
+          <div className="actions">
+            <button className="btn solid" type="button" onClick={send}>Confirmar</button>
           </div>
         ) : (
           <form className="card" onSubmit={confirm}>
