@@ -252,13 +252,31 @@ export function Gifts() {
   )
 }
 
-export function Rsvp() {
+function attendanceMessage(who, count) {
+  const lines = [
+    'Hola! Confirmo asistencia al cumple de Uma.',
+    `Nombre: ${who}`,
+  ]
+  if (count) lines.push(`Personas: ${count}`)
+  lines.push('Sábado 28 de noviembre de 2026, 21:30 hs.', 'Salón Ibiza, Av. Mitre 1043, Avellaneda.')
+  return lines.join('\n')
+}
+
+export function Rsvp({ guest = '' }) {
+  const named = guest.trim()
   const [name, setName] = useState('')
   const [count, setCount] = useState(1)
   const [sent, setSent] = useState(false)
   const [invalid, setInvalid] = useState(false)
+  const who = named || name.trim()
+  const message = attendanceMessage(who, named ? 0 : count)
 
-  const message = `Hola! Confirmo asistencia al cumple de Uma.\nNombre: ${name.trim()}\nPersonas: ${count}\nSábado 28 de noviembre de 2026, 21:30 hs.\nSalón Ibiza, Av. Mitre 1043, Avellaneda.`
+  const send = async () => {
+    await copyText(message)
+    setSent(true)
+    silverBurst()
+    window.open(whatsappHref(message), '_blank', 'noopener,noreferrer')
+  }
 
   const confirm = async (event) => {
     event.preventDefault()
@@ -267,10 +285,7 @@ export function Rsvp() {
       return
     }
     setInvalid(false)
-    await copyText(message)
-    setSent(true)
-    silverBurst()
-    window.open(whatsappHref(message), '_blank', 'noopener,noreferrer')
+    await send()
   }
 
   return (
@@ -281,12 +296,20 @@ export function Rsvp() {
         <p className="kicker ask">Confirmá tu asistencia</p>
         {sent ? (
           <div className="sent">
-            <p className="sent-name silver">{name.trim()}</p>
+            <p className="sent-name silver">{who}</p>
             <p className="lede">
-              {count === 1 ? 'Te esperamos.' : `Los esperamos, van ${count}.`} Si WhatsApp no se abrió, el mensaje quedó copiado.
+              {named || count === 1 ? 'Te esperamos.' : `Los esperamos, van ${count}.`} Si WhatsApp no se abrió, el mensaje quedó copiado.
             </p>
             <div className="actions">
               <a className="btn solid" href={whatsappHref(message)} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
+            </div>
+          </div>
+        ) : named ? (
+          <div>
+            <p className="for-label">Esta invitación es para</p>
+            <p className="for-name">{named}</p>
+            <div className="actions">
+              <button className="btn solid" type="button" onClick={send}>Confirmar</button>
             </div>
           </div>
         ) : (
@@ -319,6 +342,53 @@ export function Rsvp() {
           </form>
         )}
       </Reveal>
+    </section>
+  )
+}
+
+export function GuestLinks() {
+  const [name, setName] = useState('')
+  const [link, setLink] = useState('')
+  const [copied, setCopied] = useState(false)
+
+  const create = (event) => {
+    event.preventDefault()
+    const clean = name.trim().replace(/\s+/g, ' ')
+    if (!clean) return
+    const url = new URL('/', window.location.origin)
+    url.searchParams.set('nombre', clean)
+    setLink(url.toString())
+    setCopied(false)
+  }
+
+  const copy = async () => {
+    await copyText(link)
+    setCopied(true)
+  }
+
+  return (
+    <section className="guests">
+      <form className="wrap" onSubmit={create}>
+        <label htmlFor="invitado">Nombre</label>
+        <input
+          id="invitado"
+          name="invitado"
+          value={name}
+          placeholder="Nombre del invitado"
+          onChange={(event) => setName(event.target.value)}
+        />
+        <div className="actions">
+          <button className="btn solid" type="submit">Crear link</button>
+        </div>
+        {link && (
+          <>
+            <p className="guest-link">{link}</p>
+            <div className="actions">
+              <button className="btn ghost" type="button" onClick={copy}>{copied ? 'Copiado' : 'Copiar'}</button>
+            </div>
+          </>
+        )}
+      </form>
     </section>
   )
 }

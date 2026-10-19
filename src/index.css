@@ -1080,6 +1080,39 @@ input::placeholder { color: #7e7e8a; }
   text-transform: uppercase;
 }
 
+.for-label {
+  margin: 22px 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+}
+
+.for-name {
+  margin: 6px 0 0;
+  font-family: var(--name);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(42px, 11vw, 64px);
+  line-height: 0.95;
+  color: #1a1a1e;
+}
+
+.guests {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 48px 0;
+  text-align: left;
+}
+
+.guest-link {
+  margin: 18px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  word-break: break-all;
+  color: #d7dae3;
+}
+
 .sent-name {
   margin: 12px 0 0;
   font-family: var(--serif);
